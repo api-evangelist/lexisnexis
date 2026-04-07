@@ -1,9 +1,8 @@
 aid: lexisnexis
 name: LexisNexis
 description: >-
-  Use the LexisNexis Developer Portal data and APIs to integrate access to
-  LexisNexis� resources and solutions directly into your customers daily
-  workflow. 
+  Use the LexisNexis Developer Portal data and APIs to integrate access to LexisNexis�
+  resources and solutions directly into your customers daily workflow.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -19,9 +18,8 @@ apis:
   - aid: lexisnexis:lexisnexis
     name: LexisNexis
     description: >-
-      Use the LexisNexis Developer Portal data and APIs to integrate access to
-      LexisNexis� resources and solutions directly into your customers daily
-      workflow. 
+      Use the LexisNexis Developer Portal data and APIs to integrate access to LexisNexis�
+      resources and solutions directly into your customers daily workflow.
     humanURL: ' https://dev.lexisnexis.com/'
     tags:
       - API
