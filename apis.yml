@@ -72,6 +72,10 @@ apis:
       - type: Documentation
         url: https://risk.lexisnexis.com/products/threatmetrix
 common:
+  - type: GitHubOrganization
+    url: https://github.com/LexisNexis
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/lexisnexis
   - type: Website
     name: LexisNexis Website
     description: Main LexisNexis corporate website.
