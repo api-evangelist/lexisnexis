@@ -88,6 +88,8 @@ common:
     name: LexisNexis Risk Solutions Products
     description: Overview of LexisNexis Risk Solutions products and APIs.
     url: https://risk.lexisnexis.com/products
+  - type: LLMsTxt
+    url: https://dev.lexisnexis.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
