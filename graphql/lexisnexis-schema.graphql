@@ -1,0 +1,951 @@
+"""
+LexisNexis GraphQL Schema
+Conceptual schema derived from LexisNexis REST API covering legal research,
+news aggregation, risk solutions, identity verification, and business intelligence.
+"""
+
+# ─── Scalars ───────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar Date
+scalar JSON
+scalar URL
+
+# ─── Enums ─────────────────────────────────────────────────────────────────────
+
+enum ContentType {
+  CASE_LAW
+  STATUTE
+  REGULATION
+  NEWS_ARTICLE
+  SECONDARY_SOURCE
+  PRACTICE_GUIDE
+  FORM
+  TREATISE
+  LAW_REVIEW
+}
+
+enum Jurisdiction {
+  FEDERAL
+  STATE
+  INTERNATIONAL
+  ALL
+}
+
+enum CourtLevel {
+  SUPREME_COURT
+  CIRCUIT_COURT
+  DISTRICT_COURT
+  BANKRUPTCY_COURT
+  STATE_SUPREME
+  STATE_APPELLATE
+  STATE_TRIAL
+  ADMINISTRATIVE
+}
+
+enum CaseStatus {
+  GOOD_LAW
+  CAUTION
+  WARNING
+  OVERRULED
+  DISTINGUISHED
+  SUPERSEDED
+  UNKNOWN
+}
+
+enum PublicationType {
+  NEWSPAPER
+  WIRE_SERVICE
+  MAGAZINE
+  TRADE_JOURNAL
+  PRESS_RELEASE
+  BLOG
+  TRANSCRIPT
+  WEB_PUBLICATION
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+  UNKNOWN
+}
+
+enum IdentityMatchStatus {
+  VERIFIED
+  PARTIAL_MATCH
+  NO_MATCH
+  INSUFFICIENT_DATA
+  FRAUD_ALERT
+}
+
+enum BusinessEntityType {
+  CORPORATION
+  LLC
+  PARTNERSHIP
+  SOLE_PROPRIETORSHIP
+  NON_PROFIT
+  GOVERNMENT
+  TRUST
+  OTHER
+}
+
+enum SortOrder {
+  RELEVANCE
+  DATE_DESC
+  DATE_ASC
+  CITATION_COUNT
+}
+
+enum DocumentFormat {
+  TEXT
+  HTML
+  PDF
+  RTF
+}
+
+enum AlertFrequency {
+  IMMEDIATE
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum LitigationStatus {
+  ACTIVE
+  SETTLED
+  DISMISSED
+  PENDING
+  CLOSED
+}
+
+enum CriminalRecordType {
+  ARREST
+  CONVICTION
+  CHARGE
+  ACQUITTAL
+  EXPUNGED
+}
+
+enum PropertyType {
+  RESIDENTIAL
+  COMMERCIAL
+  INDUSTRIAL
+  AGRICULTURAL
+  VACANT_LAND
+}
+
+# ─── Core Legal Types ───────────────────────────────────────────────────────────
+
+type LegalCase {
+  id: ID!
+  citation: String!
+  title: String!
+  court: Court!
+  decidedDate: Date
+  filedDate: Date
+  docketNumber: String
+  judges: [Judge!]
+  parties: [CaseParty!]!
+  summary: String
+  holdings: [String!]
+  headnotes: [Headnote!]
+  shepardSignal: CaseStatus
+  citedBy: [Citation!]
+  cites: [Citation!]
+  fullText: String
+  pageCount: Int
+  practiceAreas: [String!]
+  jurisdiction: Jurisdiction!
+  contentType: ContentType!
+  source: ContentSource!
+}
+
+type Court {
+  id: ID!
+  name: String!
+  abbreviation: String
+  level: CourtLevel!
+  jurisdiction: Jurisdiction!
+  state: String
+  circuit: String
+  url: URL
+}
+
+type Judge {
+  id: ID!
+  name: String!
+  title: String
+  appointed: Date
+  court: Court
+  opinions: [LegalCase!]
+}
+
+type CaseParty {
+  name: String!
+  role: String!
+  counsel: [Attorney!]
+}
+
+type Attorney {
+  id: ID!
+  name: String!
+  barNumber: String
+  firm: LawFirm
+  admissions: [String!]
+  contactInfo: ContactInfo
+}
+
+type LawFirm {
+  id: ID!
+  name: String!
+  offices: [Address!]
+  attorneys: [Attorney!]
+  practiceAreas: [String!]
+  size: Int
+}
+
+type Headnote {
+  number: Int!
+  topic: String!
+  text: String!
+  legalPoints: [String!]
+}
+
+type Citation {
+  id: ID!
+  citation: String!
+  case: LegalCase
+  pageNumber: Int
+  treatment: String
+}
+
+# ─── Statutes and Regulations ───────────────────────────────────────────────────
+
+type Statute {
+  id: ID!
+  title: String!
+  code: String!
+  section: String!
+  jurisdiction: Jurisdiction!
+  state: String
+  effectiveDate: Date
+  repealedDate: Date
+  text: String!
+  amendments: [Amendment!]
+  relatedCases: [LegalCase!]
+  relatedStatutes: [Statute!]
+  practiceAreas: [String!]
+  source: ContentSource!
+}
+
+type Regulation {
+  id: ID!
+  title: String!
+  code: String!
+  part: String!
+  section: String
+  agency: GovernmentAgency!
+  effectiveDate: Date
+  federalRegisterCitation: String
+  text: String!
+  relatedStatutes: [Statute!]
+  source: ContentSource!
+}
+
+type Amendment {
+  id: ID!
+  effectiveDate: Date!
+  description: String!
+  text: String
+}
+
+type GovernmentAgency {
+  id: ID!
+  name: String!
+  abbreviation: String
+  parentAgency: GovernmentAgency
+  regulations: [Regulation!]
+  url: URL
+}
+
+# ─── News and Publications ──────────────────────────────────────────────────────
+
+type NewsArticle {
+  id: ID!
+  headline: String!
+  byline: String
+  publication: Publication!
+  publishedDate: DateTime!
+  modifiedDate: DateTime
+  body: String!
+  summary: String
+  keywords: [String!]
+  naicsCode: String
+  companies: [CompanyMention!]
+  people: [PersonMention!]
+  url: URL
+  wordCount: Int
+  language: String
+}
+
+type Publication {
+  id: ID!
+  name: String!
+  type: PublicationType!
+  country: String
+  language: String
+  circulation: Int
+  url: URL
+  description: String
+}
+
+type CompanyMention {
+  company: Company!
+  context: String
+  sentiment: String
+}
+
+type PersonMention {
+  person: Person!
+  context: String
+  role: String
+}
+
+# ─── Business Intelligence ──────────────────────────────────────────────────────
+
+type Company {
+  id: ID!
+  name: String!
+  ticker: String
+  exchange: String
+  entityType: BusinessEntityType!
+  incorporationState: String
+  incorporationDate: Date
+  dissolutionDate: Date
+  ein: String
+  dunsNumber: String
+  naicsCode: String
+  sicCode: String
+  employees: Int
+  revenue: Float
+  address: Address
+  officers: [CompanyOfficer!]
+  subsidiaries: [Company!]
+  parentCompany: Company
+  filings: [SecFiling!]
+  litigation: [LegalCase!]
+  newsArticles: [NewsArticle!]
+  riskScore: RiskScore
+  creditInfo: CreditInfo
+}
+
+type CompanyOfficer {
+  person: Person!
+  title: String!
+  startDate: Date
+  endDate: Date
+  compensation: Float
+}
+
+type SecFiling {
+  id: ID!
+  formType: String!
+  filedDate: Date!
+  periodOfReport: Date
+  company: Company!
+  url: URL
+  description: String
+}
+
+type CreditInfo {
+  score: Int
+  rating: String
+  ratingAgency: String
+  assessmentDate: Date
+  outlook: String
+}
+
+# ─── Identity and Risk (Accurint) ───────────────────────────────────────────────
+
+type Person {
+  id: ID!
+  firstName: String!
+  middleName: String
+  lastName: String!
+  suffix: String
+  dateOfBirth: Date
+  dateOfDeath: Date
+  ssn: String
+  addresses: [Address!]
+  phoneNumbers: [PhoneNumber!]
+  emails: [EmailAddress!]
+  aliases: [String!]
+  relatives: [PersonRelationship!]
+  associates: [PersonRelationship!]
+  properties: [Property!]
+  vehicles: [Vehicle!]
+  criminalRecords: [CriminalRecord!]
+  litigations: [LitigationRecord!]
+  businesses: [Company!]
+  bankruptcies: [Bankruptcy!]
+  identityVerification: IdentityVerification
+}
+
+type PersonRelationship {
+  person: Person!
+  relationshipType: String!
+  confidence: Float
+}
+
+type IdentityVerification {
+  status: IdentityMatchStatus!
+  score: Float
+  matchedFields: [String!]
+  unmatchedFields: [String!]
+  fraudIndicators: [FraudIndicator!]
+  verificationDate: DateTime!
+}
+
+type FraudIndicator {
+  type: String!
+  severity: RiskLevel!
+  description: String!
+  detectedAt: DateTime
+}
+
+type CriminalRecord {
+  id: ID!
+  type: CriminalRecordType!
+  offenseDate: Date
+  offense: String!
+  jurisdiction: String!
+  court: String
+  caseNumber: String
+  disposition: String
+  sentence: String
+  county: String
+  state: String!
+}
+
+type LitigationRecord {
+  id: ID!
+  caseNumber: String!
+  filedDate: Date
+  court: String!
+  status: LitigationStatus!
+  plaintiff: String
+  defendant: String
+  caseType: String
+  jurisdiction: String!
+}
+
+type Bankruptcy {
+  id: ID!
+  chapter: String!
+  filedDate: Date!
+  dischargedDate: Date
+  dismissedDate: Date
+  court: String!
+  caseNumber: String!
+  liabilities: Float
+  assets: Float
+}
+
+# ─── Property and Asset Records ─────────────────────────────────────────────────
+
+type Property {
+  id: ID!
+  address: Address!
+  type: PropertyType!
+  parcelNumber: String
+  owners: [Person!]
+  purchaseDate: Date
+  purchasePrice: Float
+  assessedValue: Float
+  marketValue: Float
+  squareFootage: Int
+  yearBuilt: Int
+  mortgages: [Mortgage!]
+  liens: [Lien!]
+}
+
+type Mortgage {
+  id: ID!
+  lender: String!
+  amount: Float!
+  originationDate: Date!
+  maturityDate: Date
+  interestRate: Float
+  loanType: String
+}
+
+type Lien {
+  id: ID!
+  lienholder: String!
+  amount: Float!
+  filedDate: Date!
+  releasedDate: Date
+  lienType: String!
+}
+
+type Vehicle {
+  id: ID!
+  vin: String
+  make: String!
+  model: String!
+  year: Int!
+  color: String
+  licensePlate: String
+  state: String
+  registrationDate: Date
+  owners: [Person!]
+}
+
+# ─── Risk Solutions ─────────────────────────────────────────────────────────────
+
+type RiskScore {
+  score: Float!
+  category: RiskLevel!
+  factors: [RiskFactor!]!
+  assessedAt: DateTime!
+  modelVersion: String
+}
+
+type RiskFactor {
+  name: String!
+  weight: Float!
+  value: String!
+  impact: RiskLevel!
+  description: String
+}
+
+type FraudAssessment {
+  id: ID!
+  sessionId: String!
+  deviceId: String
+  ipAddress: String
+  riskScore: Float!
+  riskLevel: RiskLevel!
+  recommendation: String!
+  indicators: [FraudIndicator!]!
+  assessedAt: DateTime!
+  policyApplied: String
+}
+
+type ThreatMetrixSession {
+  id: ID!
+  sessionId: String!
+  deviceFingerprint: String
+  ipAddress: String
+  ipRiskScore: Float
+  deviceRiskScore: Float
+  accountRiskScore: Float
+  velocityChecks: [VelocityCheck!]
+  fraudIndicators: [FraudIndicator!]
+  recommendation: String!
+  reviewedAt: DateTime!
+}
+
+type VelocityCheck {
+  checkType: String!
+  count: Int!
+  windowDuration: String!
+  threshold: Int!
+  exceeded: Boolean!
+}
+
+# ─── Search and Results ─────────────────────────────────────────────────────────
+
+type SearchResult {
+  totalCount: Int!
+  pageInfo: PageInfo!
+  items: [SearchResultItem!]!
+  facets: [SearchFacet!]
+  query: String!
+  searchTime: Float
+}
+
+union SearchResultItem = LegalCase | Statute | Regulation | NewsArticle | Company | Person
+
+type SearchFacet {
+  field: String!
+  values: [FacetValue!]!
+}
+
+type FacetValue {
+  value: String!
+  count: Int!
+  selected: Boolean!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalPages: Int!
+  currentPage: Int!
+  pageSize: Int!
+}
+
+# ─── Alerts and Monitoring ──────────────────────────────────────────────────────
+
+type Alert {
+  id: ID!
+  name: String!
+  query: String!
+  contentTypes: [ContentType!]!
+  frequency: AlertFrequency!
+  active: Boolean!
+  createdAt: DateTime!
+  lastTriggeredAt: DateTime
+  deliveryEmail: String
+  webhookUrl: URL
+}
+
+type AlertResult {
+  alert: Alert!
+  newItems: [SearchResultItem!]!
+  triggeredAt: DateTime!
+}
+
+# ─── Utility Types ──────────────────────────────────────────────────────────────
+
+type Address {
+  street1: String
+  street2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+  county: String
+  latitude: Float
+  longitude: Float
+  type: String
+  startDate: Date
+  endDate: Date
+}
+
+type PhoneNumber {
+  number: String!
+  type: String
+  carrier: String
+  lineType: String
+  active: Boolean
+}
+
+type EmailAddress {
+  address: String!
+  type: String
+  verified: Boolean
+}
+
+type ContactInfo {
+  address: Address
+  phone: PhoneNumber
+  email: EmailAddress
+  website: URL
+}
+
+type ContentSource {
+  name: String!
+  jurisdiction: Jurisdiction
+  publisher: String
+  url: URL
+}
+
+type UserProfile {
+  id: ID!
+  username: String!
+  email: String!
+  organization: String
+  role: String
+  createdAt: DateTime!
+  researchHistory: [ResearchSession!]
+  savedDocuments: [SavedDocument!]
+  alerts: [Alert!]
+  folders: [Folder!]
+}
+
+type ResearchSession {
+  id: ID!
+  startedAt: DateTime!
+  endedAt: DateTime
+  queries: [String!]
+  documentsViewed: Int
+}
+
+type SavedDocument {
+  id: ID!
+  documentId: String!
+  contentType: ContentType!
+  savedAt: DateTime!
+  notes: String
+  folder: Folder
+}
+
+type Folder {
+  id: ID!
+  name: String!
+  description: String
+  createdAt: DateTime!
+  documents: [SavedDocument!]
+  sharedWith: [String!]
+}
+
+type ApiUsageStats {
+  period: String!
+  requestCount: Int!
+  documentCount: Int!
+  searchCount: Int!
+  byContentType: JSON
+  byEndpoint: JSON
+}
+
+type MutationResult {
+  success: Boolean!
+  message: String
+  id: ID
+}
+
+# ─── Input Types ────────────────────────────────────────────────────────────────
+
+input LegalSearchInput {
+  query: String!
+  contentTypes: [ContentType!]
+  jurisdictions: [Jurisdiction!]
+  courtLevels: [CourtLevel!]
+  dateFrom: Date
+  dateTo: Date
+  practiceAreas: [String!]
+  shepardSignals: [CaseStatus!]
+  sortOrder: SortOrder
+  page: Int
+  pageSize: Int
+  format: DocumentFormat
+}
+
+input NewsSearchInput {
+  query: String!
+  publications: [String!]
+  publicationTypes: [PublicationType!]
+  dateFrom: Date
+  dateTo: Date
+  languages: [String!]
+  companies: [String!]
+  topics: [String!]
+  sortOrder: SortOrder
+  page: Int
+  pageSize: Int
+}
+
+input PersonSearchInput {
+  firstName: String
+  lastName: String!
+  middleName: String
+  dateOfBirth: Date
+  ssn: String
+  address: AddressInput
+  phone: String
+  email: String
+  state: String
+  includeDeceased: Boolean
+}
+
+input CompanySearchInput {
+  name: String
+  ein: String
+  dunsNumber: String
+  ticker: String
+  state: String
+  entityType: BusinessEntityType
+  naicsCode: String
+  page: Int
+  pageSize: Int
+}
+
+input IdentityVerificationInput {
+  firstName: String!
+  lastName: String!
+  dateOfBirth: Date!
+  ssn: String
+  address: AddressInput!
+  phone: String
+  email: String
+  ipAddress: String
+}
+
+input FraudAssessmentInput {
+  sessionId: String!
+  customerId: String
+  deviceId: String
+  ipAddress: String
+  transactionAmount: Float
+  transactionType: String
+  merchantId: String
+  customerEmail: String
+  customerPhone: String
+}
+
+input AddressInput {
+  street1: String
+  street2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+}
+
+input AlertInput {
+  name: String!
+  query: String!
+  contentTypes: [ContentType!]!
+  frequency: AlertFrequency!
+  deliveryEmail: String
+  webhookUrl: URL
+}
+
+input SaveDocumentInput {
+  documentId: String!
+  contentType: ContentType!
+  notes: String
+  folderId: ID
+}
+
+input CreateFolderInput {
+  name: String!
+  description: String
+}
+
+# ─── Query Root ─────────────────────────────────────────────────────────────────
+
+type Query {
+  """Search across legal content including cases, statutes, and regulations"""
+  searchLegal(input: LegalSearchInput!): SearchResult!
+
+  """Retrieve a specific legal case by citation or ID"""
+  legalCase(id: ID, citation: String): LegalCase
+
+  """Get Shepard's citation analysis for a case"""
+  shepardize(citation: String!): CaseStatus!
+
+  """Get cases that cite a given case"""
+  citingReferences(citation: String!, page: Int, pageSize: Int): SearchResult!
+
+  """Search statutes by jurisdiction and keyword"""
+  searchStatutes(input: LegalSearchInput!): SearchResult!
+
+  """Retrieve a specific statute"""
+  statute(id: ID!): Statute
+
+  """Retrieve a specific regulation"""
+  regulation(id: ID!): Regulation
+
+  """Search news articles"""
+  searchNews(input: NewsSearchInput!): SearchResult!
+
+  """Retrieve a specific news article"""
+  newsArticle(id: ID!): NewsArticle
+
+  """Search for a person using Accurint identity data"""
+  searchPerson(input: PersonSearchInput!): [Person!]!
+
+  """Get detailed person record by ID"""
+  person(id: ID!): Person
+
+  """Search companies by name or identifiers"""
+  searchCompany(input: CompanySearchInput!): SearchResult!
+
+  """Get detailed company record"""
+  company(id: ID!): Company
+
+  """Get risk score for a company"""
+  companyRiskScore(companyId: ID!): RiskScore
+
+  """Retrieve property records"""
+  propertyRecords(address: AddressInput!): [Property!]!
+
+  """Get vehicle records for a person or VIN"""
+  vehicleRecords(vin: String, personId: ID): [Vehicle!]!
+
+  """Get criminal records for a person"""
+  criminalRecords(personId: ID!): [CriminalRecord!]!
+
+  """Get litigation records for a person or company"""
+  litigationRecords(personId: ID, companyId: ID): [LitigationRecord!]!
+
+  """Get bankruptcy records"""
+  bankruptcyRecords(personId: ID, companyId: ID): [Bankruptcy!]!
+
+  """Retrieve ThreatMetrix session analysis"""
+  threatMetrixSession(sessionId: String!): ThreatMetrixSession
+
+  """Get current user profile"""
+  me: UserProfile
+
+  """Get saved documents for the current user"""
+  savedDocuments(folderId: ID, page: Int, pageSize: Int): [SavedDocument!]!
+
+  """Get user folders"""
+  folders: [Folder!]!
+
+  """Get active alerts for the current user"""
+  alerts: [Alert!]!
+
+  """Get API usage statistics"""
+  usageStats(period: String!): ApiUsageStats!
+
+  """List available courts"""
+  courts(jurisdiction: Jurisdiction, level: CourtLevel): [Court!]!
+
+  """List available publications"""
+  publications(type: PublicationType, country: String): [Publication!]!
+
+  """Get government agencies"""
+  agencies(parentAgencyId: ID): [GovernmentAgency!]!
+}
+
+# ─── Mutation Root ───────────────────────────────────────────────────────────────
+
+type Mutation {
+  """Verify identity against Accurint database"""
+  verifyIdentity(input: IdentityVerificationInput!): IdentityVerification!
+
+  """Submit a fraud assessment via ThreatMetrix"""
+  assessFraud(input: FraudAssessmentInput!): FraudAssessment!
+
+  """Save a document to user library"""
+  saveDocument(input: SaveDocumentInput!): SavedDocument!
+
+  """Remove a document from user library"""
+  removeDocument(id: ID!): MutationResult!
+
+  """Create a research folder"""
+  createFolder(input: CreateFolderInput!): Folder!
+
+  """Delete a research folder"""
+  deleteFolder(id: ID!): MutationResult!
+
+  """Move document to a different folder"""
+  moveDocument(documentId: ID!, folderId: ID!): SavedDocument!
+
+  """Create an alert for new content matching a query"""
+  createAlert(input: AlertInput!): Alert!
+
+  """Update an existing alert"""
+  updateAlert(id: ID!, input: AlertInput!): Alert!
+
+  """Delete an alert"""
+  deleteAlert(id: ID!): MutationResult!
+
+  """Pause or resume an alert"""
+  toggleAlert(id: ID!, active: Boolean!): Alert!
+
+  """Add a note to a saved document"""
+  annotateDocument(documentId: ID!, note: String!): SavedDocument!
+
+  """Share a folder with another user"""
+  shareFolder(folderId: ID!, userEmail: String!): Folder!
+}
