@@ -67,6 +67,12 @@ apis:
   - type: Documentation
     url: https://risk.lexisnexis.com/products/threatmetrix
 common:
+- type: TrustCenter
+  url: security/lexisnexis-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/lexisnexis-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/lexisnexis-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/LexisNexis
 - type: LinkedIn
@@ -85,6 +91,8 @@ common:
   url: https://risk.lexisnexis.com/products
 - type: LlmsText
   url: https://dev.lexisnexis.com/llms.txt
+- type: Blog
+  url: https://www.lexisnexis.com/blogs/sg
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
