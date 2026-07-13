@@ -1,0 +1,21 @@
+{
+  "repo": "lexisnexis",
+  "feeds": [
+    {
+      "source": "https://www.lexisnexis.com/blogs/sg",
+      "feed_url": "https://www.lexisnexis.com/blogs/sg/rss/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
+      "source": "https://dev.lexisnexis.com/llms.txt",
+      "feed_url": "https://dev.lexisnexis.com/llms.txt",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 4
+}
