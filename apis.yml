@@ -7,6 +7,17 @@ description: LexisNexis is a global provider of legal, regulatory, and business 
   partner-access only and require contractual agreements before credentials and OpenAPI
   specifications are released.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
