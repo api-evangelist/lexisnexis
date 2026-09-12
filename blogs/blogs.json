@@ -2,23 +2,21 @@
   "repo": "lexisnexis",
   "feeds": [
     {
-      "source": "https://www.lexisnexis.com/blogs/sg/rss/",
-      "feed_url": "https://www.lexisnexis.com/blogs/sg/rss/",
-      "title": "",
-      "saved": 0,
-      "method": "feed",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
-    },
-    {
       "source": "https://dev.lexisnexis.com/llms.txt",
       "feed_url": "https://dev.lexisnexis.com/llms.txt",
       "title": "",
       "saved": 0,
       "method": "none"
+    },
+    {
+      "source": "https://www.lexisnexis.com/blogs/sg/rss/",
+      "feed_url": "https://www.lexisnexis.com/blogs/sg/rss/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 27,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
