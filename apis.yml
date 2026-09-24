@@ -35,6 +35,14 @@ access: Partner
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lexisnexis.png
 tags:
 - Legal
+- Risk Management
+- Identity Verification
+- Fraud Detection
+- Compliance
+- Analytics
+- Data
+tags_raw:
+- Legal
 - Risk
 - Identity Verification
 - Fraud Detection
@@ -60,8 +68,6 @@ apis:
   properties:
   - type: Documentation
     url: https://dev.lexisnexis.com/
-  - url: graphql/lexisnexis-graphql.md
-    type: GraphQL
 - aid: lexisnexis:lexisnexis-risk-solutions
   name: LexisNexis Risk Solutions
   description: LexisNexis Risk Solutions offers fraud detection, identity verification,
@@ -69,6 +75,11 @@ apis:
     Dynamic Decision Platform, ThreatMetrix, and InstantID.
   humanURL: https://risk.lexisnexis.com/
   tags:
+  - Risk Management
+  - Fraud Detection
+  - Identity Verification
+  - Compliance
+  tags_raw:
   - Risk
   - Fraud Detection
   - Identity Verification
