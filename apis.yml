@@ -37,7 +37,7 @@ tags:
 - Legal
 - Risk Management
 - Identity Verification
-- Fraud Detection
+- Fraud Prevention
 - Compliance
 - Analytics
 - Data
@@ -76,7 +76,7 @@ apis:
   humanURL: https://risk.lexisnexis.com/
   tags:
   - Risk Management
-  - Fraud Detection
+  - Fraud Prevention
   - Identity Verification
   - Compliance
   tags_raw:
@@ -94,6 +94,10 @@ apis:
     Integration is partner-only.
   humanURL: https://risk.lexisnexis.com/products/threatmetrix
   tags:
+  - Fraud Prevention
+  - Digital Identity
+  - Behavioral Analytics
+  tags_raw:
   - Fraud Detection
   - Digital Identity
   - Behavioral Analytics
