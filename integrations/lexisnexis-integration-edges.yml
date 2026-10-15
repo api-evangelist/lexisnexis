@@ -2,6 +2,8 @@ generated: '2026-10-14'
 method: searched
 checked:
 - guidewire/integrations/guidewire-integration-edges.yml
+- https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+- https://technical.edugain.org/api.php?action=list_entities&type=sp&format=json
 source:
 - guidewire/integrations/guidewire-integration-edges.yml
 edges:
@@ -41,3 +43,46 @@ edges:
   - Built by Guidewire
   - 'Partner tier: Advantage'
   - Ready for Guidewire
+- partner_name: eduGAIN
+  partner: null
+  type: register
+  channel: standard-directory
+  relationship: network-participant
+  direction: partner-built
+  evidence: https://technical.edugain.org/api.php?action=list_entities&type=sp&format=json
+  category: research and education identity federation
+  contract_reference:
+    network: eduGAIN (GÉANT interfederation)
+    spec_file: null
+    roles:
+    - service-provider
+    role: service-provider
+    federations:
+    - UK-FEDERATION
+    matched_by: domain+name-among-holders:lexisnexis.com
+    entities:
+    - entity_id: https://cdc1-signin.lexisnexis.com/lnaccess/fed/authn
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: Lexis-Nexis Europe Limited
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://shib.lexisnexis.com
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: Lexis-Nexis Europe Limited
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://signin.lexisnexis.com/lnaccess/fed/authn
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: Lexis-Nexis Europe Limited
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    detected_by: sweep-higher-ed.py
+    detected: '2026-10-15'
+  detected_by: sweep-higher-ed.py
+  first_seen: '2026-10-15'
