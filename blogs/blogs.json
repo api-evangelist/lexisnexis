@@ -2,11 +2,11 @@
   "repo": "lexisnexis",
   "feeds": [
     {
-      "source": "https://dev.lexisnexis.com/llms.txt",
-      "feed_url": "https://dev.lexisnexis.com/llms.txt",
+      "source": "https://www.lexisnexis.com/blogs/sg",
+      "feed_url": "https://www.lexisnexis.com/blogs/sg/rss/",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "discovered"
     },
     {
       "source": "https://www.lexisnexis.com/blogs/sg/rss/",
@@ -14,9 +14,16 @@
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://dev.lexisnexis.com/llms.txt",
+      "feed_url": "https://dev.lexisnexis.com/llms.txt",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 29,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
