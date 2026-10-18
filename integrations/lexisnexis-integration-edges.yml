@@ -4,6 +4,7 @@ checked:
 - guidewire/integrations/guidewire-integration-edges.yml
 - https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
 - https://technical.edugain.org/api.php?action=list_entities&type=sp&format=json
+- microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 source:
 - guidewire/integrations/guidewire-integration-edges.yml
 edges:
@@ -86,3 +87,22 @@ edges:
   - Built by Guidewire
   - 'Partner tier: Advantage'
   - Ready for Guidewire
+- partner_name: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200007758
+  mirror_of: microsoft-teams/integrations/microsoft-teams-integration-edges.yml
+  apps:
+  - LexisNexis Protégé™ (US)
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Microsoft Teams app
+  publisher_verified:
+  - Microsoft 365 Publisher Attestation
