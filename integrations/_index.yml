@@ -44,32 +44,6 @@
       sirtfi: false
       coco: true
     detected_by: sweep-higher-ed.py
-    detected: '2026-10-15'
-  status: not-a-workflow
-  arazzo: null
-- slug: lexisnexis-guidewire-own
-  label: Guidewire (own)
-  partner: guidewire
-  partner_name: Guidewire (own)
-  category: Integration; Data & Reports; ClaimCenter
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://marketplace.guidewire.com/product/01t3n00000TGZ6cAAH/01t3n00000TGZ6cAAH
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: lexisnexis-microsoft-teams-own
-  label: Microsoft Teams (own)
-  partner: microsoft-teams
-  partner_name: Microsoft Teams (own)
-  category: Microsoft Teams app
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://appsource.microsoft.com/en-us/product/office/WA200007758
-  source: edge
-  relationship: platform-app
+    detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
