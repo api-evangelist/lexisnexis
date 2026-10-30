@@ -1,4 +1,4 @@
-# LexisNexis (lexisnexis)
+# LexisNexis
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,66 +66,112 @@
 
 LexisNexis is a global provider of legal, regulatory, and business information and analytics. Through the LexisNexis Developer Portal and LexisNexis Risk Solutions, partners can integrate access to legal research, fraud detection, identity verification, and risk assessment capabilities into their applications. Most LexisNexis APIs are partner-access only and require contractual agreements before credentials and OpenAPI specifications are released.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/lexisnexis/refs/heads/main/apis.yml)
+**Areas:** Legal · Risk Management · Identity Verification · Fraud Prevention · Compliance · Analytics · Data
 
-## Scope
+## LexisNexis on APIs.io
 
-- **Type:** Index
-- **Position:** Producer
-- **Access:** Partner
+Everything profiled for LexisNexis is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/lexisnexis/](https://apis.io/providers/lexisnexis/)** — or go straight to one of the APIs or properties below.
 
-## Tags:
+### APIs (3)
 
- - Legal, Risk, Identity Verification, Fraud Detection, Compliance, Analytics, Data
+- [LexisNexis Developer Portal](https://apis.io/apis/lexisnexis/lexisnexis-developer-portal/) — The LexisNexis Developer Portal provides access to legal research and content APIs, allowing partners to integrate LexisNexis legal data and services…
+- [LexisNexis Risk Solutions](https://apis.io/apis/lexisnexis/lexisnexis-risk-solutions/) — LexisNexis Risk Solutions offers fraud detection, identity verification, and risk orchestration capabilities through partner-accessed APIs, including the…
+- [LexisNexis ThreatMetrix](https://apis.io/apis/lexisnexis/lexisnexis-threatmetrix/) — ThreatMetrix delivers digital identity intelligence and behavioral analytics for fraud prevention across user interactions, accounts, and channels.…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-09
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### LexisNexis Developer Portal
-The LexisNexis Developer Portal provides access to legal research and content APIs, allowing partners to integrate LexisNexis legal data and services directly into customer workflows. Access requires a partner account and credentials.
+GraphQL schemas.
 
-**Human URL:** [https://dev.lexisnexis.com/](https://dev.lexisnexis.com/)
+- [Moved to /providers/lexisnexis/](https://apis.io/graphqls/lexisnexis/lexisnexis-graphql/)
 
-#### Tags:
- - Legal, Research, Content, Developer Portal
+#### Security (3)
 
-#### Properties
-- [Documentation](https://dev.lexisnexis.com/)
+Authentication, trust centre, and vulnerability disclosure.
 
-### LexisNexis Risk Solutions
-LexisNexis Risk Solutions offers fraud detection, identity verification, and risk orchestration capabilities through partner-accessed APIs, including the Dynamic Decision Platform, ThreatMetrix, and InstantID.
+- [Lexisnexis Domain Security](https://apis.io/security/lexisnexis/lexisnexis-domain-security/)
+- [Lexisnexis Trust Center](https://apis.io/security/lexisnexis/lexisnexis-trust-center/)
+- [Lexisnexis Vulnerability Disclosure](https://apis.io/security/lexisnexis/lexisnexis-vulnerability-disclosure/)
 
-**Human URL:** [https://risk.lexisnexis.com/](https://risk.lexisnexis.com/)
+#### Plans and pricing (1)
 
-#### Tags:
- - Risk, Fraud Detection, Identity Verification, Compliance
+Published plans, tiers and prices.
 
-#### Properties
-- [Documentation](https://risk.lexisnexis.com/products)
+- [Lexisnexis Plans Pricing](https://apis.io/plans/lexisnexis/lexisnexis-plans-pricing/)
 
-### LexisNexis ThreatMetrix
-ThreatMetrix delivers digital identity intelligence and behavioral analytics for fraud prevention across user interactions, accounts, and channels. Integration is partner-only.
+#### Rate limits (1)
 
-**Human URL:** [https://risk.lexisnexis.com/products/threatmetrix](https://risk.lexisnexis.com/products/threatmetrix)
+Published request limits.
 
-#### Tags:
- - Fraud Detection, Digital Identity, Behavioral Analytics
+- [Lexisnexis Rate Limits](https://apis.io/rate-limits/lexisnexis/lexisnexis-rate-limits/)
 
-#### Properties
-- [Documentation](https://risk.lexisnexis.com/products/threatmetrix)
+#### FinOps (1)
 
-## Common Properties
+What the API costs to run, by operation.
+
+- [Lexisnexis Finops](https://apis.io/finops/lexisnexis/lexisnexis-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.lexisnexis.com/)
-- [Developer Portal](https://dev.lexisnexis.com/)
-- [Risk Solutions Products](https://risk.lexisnexis.com/products)
+- [Documentation](https://risk.lexisnexis.com/products)
+- [Blog](https://www.lexisnexis.com/blogs/sg)
+- [GitHub](https://github.com/LexisNexis)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 14.1** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 15.8 |
+
+**Agent readiness 0.6** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/lexisnexis/](https://apis.io/providers/lexisnexis/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for LexisNexis: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/lexisnexis/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
